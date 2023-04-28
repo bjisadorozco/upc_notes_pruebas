@@ -1,6 +1,7 @@
 import 'package:flutter/material.dart';
 import 'package:upc_notes/iu/pages/pruebaApuntes.dart';
 import 'package:upc_notes/iu/pages/pruebaCalculoRapido.dart';
+import 'package:upc_notes/iu/pages/pruebaIniciarSesion.dart';
 
 class MenuLateral extends StatelessWidget {
   const MenuLateral({super.key});
@@ -36,6 +37,11 @@ class MenuLateral extends StatelessWidget {
                     color: Color(0xFFDEE2E6),
                   ),
                   ),
+                  //  Divider(
+                  //   color: Colors.black, // color de la línea
+                  //   height: 1, // altura de la línea
+                  //   thickness: 1, // grosor de la línea
+                  // ),
                 ],
               ),
             ListTile(
@@ -85,6 +91,18 @@ class MenuLateral extends StatelessWidget {
                   Navigator.push(
                     context,
                     MaterialPageRoute(builder: (context) => const Apuntes()),
+                  );
+                },
+                iconColor: Colors.black,
+                //tileColor: Colors.black,
+            ),
+            ListTile(
+                leading: Icon(Icons.exit_to_app),
+                title: Text("Salir"),
+                onTap: () {
+                  Navigator.push(
+                    context,
+                    MaterialPageRoute(builder: (context) => const IniciarSesion()),
                   );
                 },
                 iconColor: Colors.black,

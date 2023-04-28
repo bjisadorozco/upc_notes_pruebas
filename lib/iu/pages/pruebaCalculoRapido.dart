@@ -28,7 +28,7 @@ class _CalculoRapidoState extends State<CalculoRapido> {
       ),
       
       body: Padding(
-        padding: const EdgeInsets.fromLTRB(10.0, 45.0, 10.0, 20.0), 
+        padding: const EdgeInsets.fromLTRB(10.0, 18.0, 10.0, 20.0), 
         child: Column(
           children: [
             Container(

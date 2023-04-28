@@ -1,5 +1,5 @@
 import 'package:flutter/material.dart';
-import 'package:upc_notes/iu/pages/IniciarSesion.dart';
+import 'package:upc_notes/iu/pages/pruebaIniciarSesion.dart';
 import 'pages/prueba.dart';
 
 class App extends StatelessWidget {
@@ -11,7 +11,7 @@ class App extends StatelessWidget {
       debugShowCheckedModeBanner: false,
       title: 'UPC NOTES',
       //theme: ThemeData(primaryColor: const Color(0xFF7FE1AD)),
-      home: Iniciar(),
+      home: IniciarSesion(),
     );
   }
 }

@@ -40,7 +40,7 @@ class _IniciarState extends State<Iniciar> {
               ),
               //const SizedBox(height: 32.0),
               Padding(
-                padding: const EdgeInsets.all(16.0),
+                padding: const EdgeInsets.all(10.0),
                 child: Column(
                   mainAxisAlignment: MainAxisAlignment.center,
                   children: [
@@ -49,8 +49,16 @@ class _IniciarState extends State<Iniciar> {
                       child: TextFormField(
                         decoration: const InputDecoration(
                           labelText: 'Correo electrónico',
+                          labelStyle: const TextStyle(color: Colors.black),
                           contentPadding: EdgeInsets.symmetric(vertical: 8.0),
-                          hintText: 'Ingrese correo',
+                          hintText: 'Ingrese correo electronico',
+                          enabledBorder: UnderlineInputBorder(
+                            borderSide: BorderSide(color: Colors.white), // Cambiar color de la línea
+                          ),
+                          focusedBorder: UnderlineInputBorder( //cuando lo selecciono
+                            borderSide: BorderSide(color: Colors.white),
+                          ),
+                          suffixIconColor: Colors.white,
                         ),
                       ),
                     ),
@@ -62,15 +70,17 @@ class _IniciarState extends State<Iniciar> {
                         //obscureText: !_showPassword,
                         decoration: InputDecoration(
                           labelText: 'Contraseña',
-                          labelStyle: const TextStyle(fontSize: 20, color: Colors.black),
-                          floatingLabelBehavior: FloatingLabelBehavior.always,
+                          labelStyle: const TextStyle(color: Colors.black),
+                          contentPadding: EdgeInsets.symmetric(vertical: 8.0),
+                          hintText: 'Ingrese contraseña',
+                          //floatingLabelBehavior: FloatingLabelBehavior.always,
                           enabledBorder: const UnderlineInputBorder(
                             borderSide: BorderSide(color: Colors.white), // Cambiar color de la línea
                           ),
                           focusedBorder: const UnderlineInputBorder( //cuando lo selecciono
                             borderSide: BorderSide(color: Colors.white),
                           ),
-                          contentPadding: const EdgeInsets.symmetric(vertical: 8.0),
+                          //contentPadding: const EdgeInsets.symmetric(vertical: 8.0),
                           //hintText: 'Ingrese contraseña',
                           suffixIconColor: Colors.white,
                           suffixIcon: IconButton(

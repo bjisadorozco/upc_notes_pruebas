@@ -13,11 +13,11 @@ class _PrincipalState extends State<Principal> {
     return Scaffold(
       backgroundColor: const Color(0xFF7FE1AD),
       //backgroundColor: const Color(0xdee2e6),
-      drawer: MenuLateral(
-   
+      drawer: const MenuLateral(   
       ),
       appBar: AppBar(
         backgroundColor: const Color(0xFF7FE1AD),
+        foregroundColor: Colors.black,
       )
     );
   }

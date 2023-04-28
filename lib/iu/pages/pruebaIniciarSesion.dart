@@ -1,20 +1,18 @@
 import 'package:flutter/material.dart';
-import 'package:upc_notes/iu/pages/pruebaIniciarSesion.dart';
+import 'package:upc_notes/iu/pages/pruebaPrincipal.dart';
+import 'package:upc_notes/iu/pages/pruebaRegistrate.dart';
 
-class RegistratePrueba extends StatefulWidget {
-  const RegistratePrueba ({super.key});
+class IniciarSesion extends StatefulWidget {
+  const IniciarSesion({super.key});
 
   @override
-  State<RegistratePrueba> createState() => _RegistratePruebaState();
+  State<IniciarSesion> createState() => _IniciarSesionState();
 }
 
-class _RegistratePruebaState extends State<RegistratePrueba> {
+class _IniciarSesionState extends State<IniciarSesion> {
   bool _hidePassword = false;
-  bool _showPassword = false;
-
   @override
   Widget build(BuildContext context) {
-    
     return Scaffold(
       backgroundColor: const Color(0xFF7FE1AD),
       body: Center(
@@ -23,11 +21,11 @@ class _RegistratePruebaState extends State<RegistratePrueba> {
           children: [           
             Padding(padding: const EdgeInsets.all(0.0),
                 child: Image.asset('assets/logo.png', height: 100.0, width: 300,)),
-                //const SizedBox(height: 5.0),
+                //const SizedBox(height: 10.0),
               const Padding(
                 padding: EdgeInsets.only(top: 10.0),
                 child: Text(
-                  'Registrate',
+                  'Iniciar Sesion',
                   style: TextStyle(
                   fontFamily: 'Quicksand',
                   fontSize: 30,
@@ -36,31 +34,7 @@ class _RegistratePruebaState extends State<RegistratePrueba> {
                 ),
                 ),
               ),
-              //const SizedBox(height: 5.0),
-              Padding(padding: const EdgeInsets.all(10.0),
-                child: Column(
-                  mainAxisAlignment: MainAxisAlignment.center,
-                  children: [
-                    SizedBox(
-                      width: 300,
-                      child: TextFormField(
-                        decoration: const InputDecoration(
-                          labelText: 'Usuario',
-                          labelStyle: TextStyle(color: Colors.black),
-                          contentPadding: EdgeInsets.symmetric(vertical: 6.0),
-                          hintText: 'Ingrese usuario',
-                          enabledBorder: UnderlineInputBorder(
-                            borderSide: BorderSide(color: Colors.white), // Cambiar color de la línea
-                          ),
-                          focusedBorder: UnderlineInputBorder( //cuando lo selecciono
-                            borderSide: BorderSide(color: Colors.white),
-                          ),
-                        ),
-                      ),
-                    ),
-                  ]
-                )  
-              ),
+              //const SizedBox(height: 20.0),
               Padding(padding: const EdgeInsets.all(10.0),
                 child: Column(
                   mainAxisAlignment: MainAxisAlignment.center,
@@ -70,7 +44,7 @@ class _RegistratePruebaState extends State<RegistratePrueba> {
                       child: TextFormField(
                         decoration: const InputDecoration(
                           labelText: 'Correo electronico',
-                          labelStyle: TextStyle(color: Colors.black),
+                          labelStyle:  TextStyle(color: Colors.black),
                           contentPadding: EdgeInsets.symmetric(vertical: 6.0),
                           hintText: 'Ingrese correo electronico',
                           enabledBorder: UnderlineInputBorder(
@@ -119,41 +93,8 @@ class _RegistratePruebaState extends State<RegistratePrueba> {
                   ]
                 )  
               ),
-              Padding(padding: const EdgeInsets.all(10.0),
-                child: Column(
-                  mainAxisAlignment: MainAxisAlignment.center,
-                  children: [
-                    SizedBox(
-                      width: 300,
-                      child: TextFormField(
-                        obscureText: _showPassword,
-                        decoration: InputDecoration(
-                          labelText: 'Confirmar contraseña',
-                          labelStyle: const TextStyle(color: Colors.black),
-                          hintText: 'Ingrese contraseña',
-                          enabledBorder: const UnderlineInputBorder(
-                            borderSide: BorderSide(color: Colors.white), // Cambiar color de la línea
-                          ),
-                          focusedBorder: const UnderlineInputBorder( //cuando lo selecciono
-                            borderSide: BorderSide(color: Colors.white),
-                          ),
-                          suffixIconColor: Colors.white,
-                          contentPadding: const EdgeInsets.symmetric(vertical: 6.0),
-                          suffixIcon: IconButton(
-                            icon: Icon(_showPassword ? Icons.visibility : Icons.visibility_off),
-                            onPressed: () {
-                              setState(() {
-                                _showPassword = !_showPassword;
-                              });
-                            },
-                          ),
-                        ),
-                      ),
-                    ),
-                  ]
-                )  
-              ),
-              SizedBox(
+              //const SizedBox(height: 20.0),
+               SizedBox(
                 width: 300,
                 height: 60,
                 child: Padding(
@@ -161,10 +102,11 @@ class _RegistratePruebaState extends State<RegistratePrueba> {
                   child: ElevatedButton(
                     onPressed: () {
                       // Aquí iría la lógica para validar el correo y la contraseña
+                      Navigator.push(context, MaterialPageRoute(builder: (context) => const Principal()));
                     },
                     // ignore: sort_child_properties_last
                     child: const Text(
-                      'Registrate',
+                      'Iniciar Sesion',
                       style: TextStyle(color: Colors.white, fontSize: 15),
                     ),
                     style: ElevatedButton.styleFrom(
@@ -177,19 +119,19 @@ class _RegistratePruebaState extends State<RegistratePrueba> {
                   mainAxisAlignment: MainAxisAlignment.center,
                   children: <Widget>[
                     const Text(
-                       '¿Ya tienes una cuenta?',
+                       '¿No tienes una cuenta?',
                       style: TextStyle(color: Colors.white), 
                     ),
                     TextButton(
                       onPressed: () {
-                        Navigator.pop(context, MaterialPageRoute(builder: (context) => const IniciarSesion()));
+                        Navigator.push(context, MaterialPageRoute(builder: (context) => const RegistratePrueba()));
                       },
-                      child: const Text('Iniciar Sesion',
+                      child: const Text('Regististrate',
                       style: TextStyle(color: Colors.black)),
                     ),
                   ],
                 ),
-          ],
+          ]    
         ),
       ),
     );
