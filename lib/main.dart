@@ -1,7 +1,12 @@
 import 'package:flutter/material.dart';
+import 'package:get/get.dart';
+import 'package:upc_notes/domain/controller/controllerApuntes.dart';
+import 'domain/controller/controllerEstudiante.dart';
 import 'iu/app.dart';
 
 void main() {
+   Get.put(ControlEstudiante());
+   Get.put(ControlApuntes());
   runApp(const App());
 }
 

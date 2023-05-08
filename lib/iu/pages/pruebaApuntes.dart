@@ -1,4 +1,7 @@
 import 'package:flutter/material.dart';
+import 'package:get/get.dart';
+
+import '../../domain/controller/controllerApuntes.dart';
 
 class Apuntes extends StatefulWidget {
   const Apuntes({super.key});
@@ -9,8 +12,9 @@ class Apuntes extends StatefulWidget {
 
 class _ApuntesState extends State<Apuntes> {
   bool _mostrarContenedor = false;
- // TextEditingController _tituloController = TextEditingController();
- // TextEditingController _contenidoController = TextEditingController();
+  ControlApuntes controla = Get.find();
+  TextEditingController titulo = TextEditingController();
+  TextEditingController descripcion = TextEditingController();
 
 // @override
 //   void dispose() {S
@@ -87,10 +91,11 @@ class _ApuntesState extends State<Apuntes> {
                               ),
                             ),
                           ),
-                          const Padding(
-                            padding: EdgeInsets.fromLTRB(20, 0, 20, 0),
+                           Padding(
+                            padding: const EdgeInsets.fromLTRB(20, 0, 20, 0),
                             child: TextField(
-                              decoration: InputDecoration(
+                              controller: titulo,
+                              decoration: const InputDecoration(
                                 hintText: 'Titulo',
                                 border: InputBorder.none,
                               ),
@@ -103,18 +108,19 @@ class _ApuntesState extends State<Apuntes> {
                             thickness: 1.0,
                             height: 1.0,
                           ),
-                          const Expanded(
+                           Expanded(
                             //height: 200, // ajuste el tamaño de esta caja según sea necesario
                             child: Padding(
-                              padding: EdgeInsets.fromLTRB(20, 0, 20, 0),
+                              padding: const EdgeInsets.fromLTRB(20, 0, 20, 0),
                               child: TextField(
+                                controller: descripcion,
                                 maxLines: null,
                                 expands: true,
-                                decoration: InputDecoration(
+                                decoration: const InputDecoration(
                                   hintText: 'Apuntes',
                                   border: InputBorder.none,
                                 ),
-                                style: TextStyle(fontSize: 18),
+                                style: const TextStyle(fontSize: 18),
                               ),
                             ),
                           ),
@@ -158,25 +164,36 @@ class _ApuntesState extends State<Apuntes> {
                                 padding: const EdgeInsets.symmetric(horizontal: 5),
                                 child: ElevatedButton(
                                   onPressed: () {
-                                    setState(() {
-                                      _mostrarContenedor = false;
-                                    });
+                                      controla.crearApunte(titulo.text, descripcion.text).then((value) => {
+                                          Get.snackbar(
+                                              'Estudiante', controla.listaMensajes![0].mensaje,
+                                              duration: const Duration(seconds: 2),
+                                              icon: const Icon(Icons.info),
+                                              shouldIconPulse: true,
+                                              backgroundColor: const Color(0xFFDEE2E6)
+                                          ),
+                                          setState(() {
+                                        _mostrarContenedor = false;
+                                      }),
+                                      titulo.text = "",
+                                      descripcion.text = "",
+                                      });
                                   },
                                   style: ElevatedButton.styleFrom(
-                                    backgroundColor: const Color(0xFF7FE1AD),
-                                    shape: RoundedRectangleBorder(
-                                      borderRadius: BorderRadius.circular(20), 
-                                      side: const BorderSide(
-                                        color: Colors.black,
-                                        width: 1.0,
-                                      ), // ajusta el radio según sea necesario
-                                    ),
+                                      backgroundColor: const Color(0xFF7FE1AD),
+                                      shape: RoundedRectangleBorder(
+                                          borderRadius: BorderRadius.circular(20), 
+                                          side: const BorderSide(
+                                              color: Colors.black,
+                                              width: 1.0,
+                                          ), // ajusta el radio según sea necesario
+                                      ),
                                   ),
                                   child: const Text('Guardar', style: TextStyle(
                                       color: Colors.black,
                                       fontSize: 18,
-                                    ),),
-                                ),
+                                  ),),
+                                )
                               ),
                             ]
                           ),

@@ -1,4 +1,6 @@
 import 'package:flutter/material.dart';
+import 'package:get/get.dart';
+import 'package:upc_notes/domain/controller/controllerEstudiante.dart';
 import 'package:upc_notes/iu/pages/pruebaIniciarSesion.dart';
 
 class RegistratePrueba extends StatefulWidget {
@@ -9,12 +11,16 @@ class RegistratePrueba extends StatefulWidget {
 }
 
 class _RegistratePruebaState extends State<RegistratePrueba> {
-  bool _hidePassword = false;
-  bool _showPassword = false;
+  final _hidePassword = true.obs;
+  final _showPassword = true.obs;
 
   @override
   Widget build(BuildContext context) {
-    
+    ControlEstudiante controle = Get.find();
+    TextEditingController usuario = TextEditingController();
+    TextEditingController email = TextEditingController();
+    TextEditingController pass = TextEditingController();
+    TextEditingController passc = TextEditingController();
     return Scaffold(
       backgroundColor: const Color(0xFF7FE1AD),
       body: Center(
@@ -44,6 +50,7 @@ class _RegistratePruebaState extends State<RegistratePrueba> {
                     SizedBox(
                       width: 300,
                       child: TextFormField(
+                        controller: usuario,
                         decoration: const InputDecoration(
                           labelText: 'Usuario',
                           labelStyle: TextStyle(color: Colors.black),
@@ -68,6 +75,7 @@ class _RegistratePruebaState extends State<RegistratePrueba> {
                     SizedBox(
                       width: 300,
                       child: TextFormField(
+                        controller: email,
                         decoration: const InputDecoration(
                           labelText: 'Correo electronico',
                           labelStyle: TextStyle(color: Colors.black),
@@ -92,7 +100,8 @@ class _RegistratePruebaState extends State<RegistratePrueba> {
                     SizedBox(
                       width: 300,
                       child: TextFormField(
-                        obscureText: _hidePassword,
+                        controller: pass,
+                        obscureText: _hidePassword.value,
                         decoration: InputDecoration(
                           labelText: 'Contraseña',
                           labelStyle: const TextStyle(color: Colors.black),
@@ -105,14 +114,15 @@ class _RegistratePruebaState extends State<RegistratePrueba> {
                           ),
                           suffixIconColor: Colors.white,
                           contentPadding: const EdgeInsets.symmetric(vertical: 6.0),
-                          suffixIcon: IconButton(
-                            icon: Icon(_hidePassword ? Icons.visibility : Icons.visibility_off),
-                            onPressed: () {
-                              setState(() {
-                                _hidePassword = !_hidePassword;
-                              });
-                            },
-                          ),
+                          suffixIcon: Obx(() => IconButton(
+                              key: UniqueKey(),
+                              icon: Icon(_hidePassword.value ? Icons.visibility : Icons.visibility_off),
+                              onPressed: () {
+                              _hidePassword.value= !_hidePassword.value;      
+                              },
+                              //color: Colors.white, // Cambiar el color del icono
+                            ),
+                        ),
                         ),
                       ),
                     ),
@@ -126,7 +136,8 @@ class _RegistratePruebaState extends State<RegistratePrueba> {
                     SizedBox(
                       width: 300,
                       child: TextFormField(
-                        obscureText: _showPassword,
+                        controller: passc,
+                        obscureText: _showPassword.value,
                         decoration: InputDecoration(
                           labelText: 'Confirmar contraseña',
                           labelStyle: const TextStyle(color: Colors.black),
@@ -139,13 +150,14 @@ class _RegistratePruebaState extends State<RegistratePrueba> {
                           ),
                           suffixIconColor: Colors.white,
                           contentPadding: const EdgeInsets.symmetric(vertical: 6.0),
-                          suffixIcon: IconButton(
-                            icon: Icon(_showPassword ? Icons.visibility : Icons.visibility_off),
-                            onPressed: () {
-                              setState(() {
-                                _showPassword = !_showPassword;
-                              });
-                            },
+                          suffixIcon: Obx(() => IconButton(
+                              key: UniqueKey(),
+                              icon: Icon(_showPassword.value ? Icons.visibility : Icons.visibility_off),
+                              onPressed: () {
+                                  _showPassword.value = !_showPassword.value;
+                              },
+                              //color: Colors.white,
+                            ),
                           ),
                         ),
                       ),
@@ -161,6 +173,23 @@ class _RegistratePruebaState extends State<RegistratePrueba> {
                   child: ElevatedButton(
                     onPressed: () {
                       // Aquí iría la lógica para validar el correo y la contraseña
+                      if(pass.text == passc.text){
+                          controle.crearEstudiante(usuario.text, email.text, pass.text).then((value) => {
+                          Get.snackbar(
+                                  'Estudiante', controle.listaMensajes![0].mensaje,
+                                  duration: const Duration(seconds: 2),
+                                  icon: const Icon(Icons.info),
+                                  shouldIconPulse: true,
+                                  backgroundColor: const Color(0xFFDEE2E6))
+                        });
+                        }else{
+                          Get.snackbar(
+                                  'Error', 'Las contraseñas no coinciden',
+                                  duration: const Duration(seconds: 2),
+                                  icon: const Icon(Icons.info),
+                                  shouldIconPulse: true,
+                                  backgroundColor: const Color(0xFFDEE2E6));
+                        }
                     },
                     // ignore: sort_child_properties_last
                     child: const Text(
@@ -182,7 +211,8 @@ class _RegistratePruebaState extends State<RegistratePrueba> {
                     ),
                     TextButton(
                       onPressed: () {
-                        Navigator.pop(context, MaterialPageRoute(builder: (context) => const IniciarSesion()));
+                        Get.toNamed("/login");
+                        //Navigator.pop(context, MaterialPageRoute(builder: (context) => const IniciarSesion()));
                       },
                       child: const Text('Iniciar Sesion',
                       style: TextStyle(color: Colors.black)),

@@ -1,4 +1,6 @@
 import 'package:flutter/material.dart';
+import 'package:get/get.dart';
+import 'package:upc_notes/domain/controller/controllerEstudiante.dart';
 import 'package:upc_notes/iu/pages/pruebaPrincipal.dart';
 import 'package:upc_notes/iu/pages/pruebaRegistrate.dart';
 
@@ -13,6 +15,10 @@ class _IniciarSesionState extends State<IniciarSesion> {
   bool _hidePassword = false;
   @override
   Widget build(BuildContext context) {
+    ControlEstudiante controle = Get.find();
+
+    TextEditingController email = TextEditingController();
+    TextEditingController pass = TextEditingController();
     return Scaffold(
       backgroundColor: const Color(0xFF7FE1AD),
       body: Center(
@@ -102,7 +108,21 @@ class _IniciarSesionState extends State<IniciarSesion> {
                   child: ElevatedButton(
                     onPressed: () {
                       // Aquí iría la lógica para validar el correo y la contraseña
-                      Navigator.push(context, MaterialPageRoute(builder: (context) => const Principal()));
+                      // controle
+                      //         .validarEstudiante(email.text, pass.text)
+                      //         .then((value) {
+                      //       if (controle.listaEstudianteLogin!.isEmpty) {
+                      //         Get.snackbar('Usuario', 'Usuario no encontrado',
+                      //             duration: const Duration(seconds: 2),
+                      //             icon: const Icon(Icons.info),
+                      //             shouldIconPulse: true,
+                      //             backgroundColor: const Color(0xFFDEE2E6));
+                      //       } else {
+                      //         Get.toNamed("/home");
+                      //       }
+                      //     });
+                      Get.toNamed("/home");
+                      //Navigator.push(context, MaterialPageRoute(builder: (context) => const Principal()));
                     },
                     // ignore: sort_child_properties_last
                     child: const Text(
@@ -124,7 +144,8 @@ class _IniciarSesionState extends State<IniciarSesion> {
                     ),
                     TextButton(
                       onPressed: () {
-                        Navigator.push(context, MaterialPageRoute(builder: (context) => const RegistratePrueba()));
+                        Get.toNamed("/register");
+                        //Navigator.push(context, MaterialPageRoute(builder: (context) => const RegistratePrueba()));
                       },
                       child: const Text('Regististrate',
                       style: TextStyle(color: Colors.black)),
