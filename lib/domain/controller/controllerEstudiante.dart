@@ -12,6 +12,7 @@ class ControlEstudiante extends GetxController {
   }
 
   Future<void> validarEstudiante(String e, String p) async {
+    print(e);
     _listarEstudiante.value = await PeticionesEstudiante.validarEstudiante(e, p);
   }
 

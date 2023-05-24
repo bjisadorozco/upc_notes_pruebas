@@ -1,7 +1,9 @@
 import 'package:flutter/material.dart';
 import 'package:get/get.dart';
+import 'package:upc_notes/iu/pages/PruebaRegistrarProfesores.dart';
 import 'package:upc_notes/iu/pages/pruebaIniciarSesion.dart';
 import 'package:upc_notes/iu/pages/pruebaPrincipal.dart';
+import 'package:upc_notes/iu/pages/pruebaRegistrarApuntes.dart';
 import 'package:upc_notes/iu/pages/pruebaRegistrate.dart';
 
 class App extends StatelessWidget {
@@ -19,6 +21,8 @@ class App extends StatelessWidget {
         "/login": (context) => const IniciarSesion(),
         "/register": (context) => const RegistratePrueba(),
         "/home": (context) => const Principal(),
+        "/addApuntes": (context) => const RegistrarApuntes(),
+        "/addProfesores": (context) => const registrarProfesores(),
       },
     );
   }

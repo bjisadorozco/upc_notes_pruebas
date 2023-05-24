@@ -28,16 +28,14 @@ class PeticionesEstudiante {
   static Future<List<Estudiante>> validarEstudiante(String e, String p) async {
     var url = Uri.parse(
         "https://p-movil.000webhostapp.com/UPC_NOTES/validarEstudiante.php");
-
+    print(e);
     final response = await http.post(url, body: {'email': e, 'pass': p});
-
+  //print(response.body);
     return compute(convertirAlista2, response.body);
   }
 
   static List<Estudiante> convertirAlista2(String responsebody) {
     final pasar = json.decode(responsebody).cast<Map<String, dynamic>>();
-    print(pasar);
-    print(pasar[0]['mensaje']);
     return pasar.map<Estudiante>((json) => Estudiante.desdeJson(json)).toList();
   }
 }

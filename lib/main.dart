@@ -1,11 +1,15 @@
 import 'package:flutter/material.dart';
 import 'package:get/get.dart';
 import 'package:upc_notes/domain/controller/controllerApuntes.dart';
+import 'package:upc_notes/domain/controller/controllerAsignaturas.dart';
 import 'domain/controller/controllerEstudiante.dart';
+import 'domain/controller/controllerProfesores.dart';
 import 'iu/app.dart';
 
 void main() {
    Get.put(ControlEstudiante());
+   Get.put(ControlAsignatura());
+   Get.put(ControlProfesores());
    Get.put(ControlApuntes());
   runApp(const App());
 }

@@ -1,40 +1,39 @@
 import 'dart:convert';
 import 'package:flutter/foundation.dart';
-import 'package:upc_notes/iu/pages/pruebaApuntes.dart';
-import '../../domain/models/apuntes.dart';
+import 'package:upc_notes/domain/models/profesores.dart';
 import '../../domain/models/utiles.dart';
 import 'package:http/http.dart' as http;
 
-class PeticionesApuntes {
-  static Future<List<Mensajes>> modificarApunte(
-      String titulo, String descripcion) async {
+class PeticionesProfesores {
+  static Future<List<Mensajes>> modificarProfesor(
+      String docente, String email, String telefono, String direccion) async {
     var url = Uri.parse(
-        "https://p-movil.000webhostapp.com/UPC_NOTES/modificarApunte.php");
+        "https://p-movil.000webhostapp.com/UPC_NOTES/modificarProfesor.php");
 
     final response = await http
-        .post(url, body: {'titulo': titulo, 'descripcion': descripcion});
+        .post(url, body: {'docente': docente, 'email': email, 'telefono': telefono, 'direccion': direccion});
 
     print(response.statusCode);
     //print(response.body);
     return compute(convertirAlista, response.body);
   }
   
-  static Future<List<Mensajes>> eliminarApunte(
-      String titulo) async {
+  static Future<List<Mensajes>> eliminarProfesor(
+      int idProfe) async {
     var url = Uri.parse(
-        "https://p-movil.000webhostapp.com/UPC_NOTES/eliminarApunte.php");
+        "https://p-movil.000webhostapp.com/UPC_NOTES/eliminarProfesor.php");
 
     final response = await http
-        .post(url, body: {'titulo': titulo});
+        .post(url, body: {'idProfe': idProfe});
 
     print(response.statusCode);
     //print(response.body);
     return compute(convertirAlista, response.body);
   }
 
-  static Future<List<ApuntesEstudiante>> getListApuntes() async {
+  static Future<List<Profesores>> getListProfesores() async {
     var url = Uri.parse(
-        "https://p-movil.000webhostapp.com/UPC_NOTES/listaApuntes.php");
+        "https://p-movil.000webhostapp.com/UPC_NOTES/listaProfesores.php");
 
     final response = await http.get(url);
 
@@ -43,20 +42,19 @@ class PeticionesApuntes {
     return compute(convertirAlista2, response.body);
   }
 
-  static List<ApuntesEstudiante> convertirAlista2(String responsebody) {
+  static List<Profesores> convertirAlista2(String responsebody) {
     final pasar = json.decode(responsebody).cast<Map<String, dynamic>>();
       //print(pasar);
       //print(pasar[0]['mensaje']);
-    return pasar.map<ApuntesEstudiante>((json) => ApuntesEstudiante.desdeJson(json)).toList();
+    return pasar.map<Profesores>((json) => Profesores.desdeJson(json)).toList();
   }
-
-  static Future<List<Mensajes>> registrarApunte(
-      String titulo, String descripcion) async {
+  static Future<List<Mensajes>> registrarProfesor(
+      String docente, String email, String telefono, String direccion) async {
     var url = Uri.parse(
-        "https://p-movil.000webhostapp.com/UPC_NOTES/agregarApunte.php");
+        "https://p-movil.000webhostapp.com/UPC_NOTES/agregarProfesor.php");
 
     final response = await http
-        .post(url, body: {'titulo': titulo, 'descripcion': descripcion});
+        .post(url, body: {'docente': docente, 'email': email, 'telefono': telefono, 'direccion': direccion});
 
     print(response.statusCode);
     print(response.body);

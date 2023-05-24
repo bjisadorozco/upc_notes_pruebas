@@ -2,6 +2,10 @@ import 'package:flutter/material.dart';
 import 'package:upc_notes/iu/pages/pruebaApuntes.dart';
 import 'package:upc_notes/iu/pages/pruebaCalculoRapido.dart';
 import 'package:upc_notes/iu/pages/pruebaIniciarSesion.dart';
+import 'package:upc_notes/iu/pages/pruebaListaApuntes.dart';
+import 'package:upc_notes/iu/pages/pruebaListarAsignatura.dart';
+
+import 'PruebaListaProfesores.dart';
 
 class MenuLateral extends StatelessWidget {
   const MenuLateral({super.key});
@@ -61,14 +65,24 @@ class MenuLateral extends StatelessWidget {
             ListTile(
                 leading: Icon(Icons.import_contacts),
                 title: Text("Asignaturas"),
-                onTap:() => null,
+                onTap:() => {
+                  Navigator.push(
+                    context,
+                    MaterialPageRoute(builder: (context) => const ListarAsignaturas()),
+                  ),
+                },
                 iconColor: Colors.black,
                 //tileColor: Colors.black,
             ),
             ListTile(
                 leading: Icon(Icons.people_alt),
                 title: Text("Profesores"),
-                onTap:() => null,
+                onTap:() => {
+                  Navigator.push(
+                    context,
+                    MaterialPageRoute(builder: (context) => const ListProfesores()),
+                  ),
+                },
                 iconColor: Colors.black,
                 //tileColor: Colors.black,
             ),

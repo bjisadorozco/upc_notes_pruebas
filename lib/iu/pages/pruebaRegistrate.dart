@@ -99,7 +99,8 @@ class _RegistratePruebaState extends State<RegistratePrueba> {
                   children: [
                     SizedBox(
                       width: 300,
-                      child: TextFormField(
+                      child: Obx(() =>TextFormField(
+                        
                         controller: pass,
                         obscureText: _hidePassword.value,
                         decoration: InputDecoration(
@@ -125,6 +126,7 @@ class _RegistratePruebaState extends State<RegistratePrueba> {
                         ),
                         ),
                       ),
+                      )
                     ),
                   ]
                 )  
