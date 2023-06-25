@@ -108,20 +108,20 @@ class _IniciarSesionState extends State<IniciarSesion> {
                   child: ElevatedButton(
                     onPressed: () {
                       //Aquí iría la lógica para validar el correo y la contraseña
-                      controle
-                              .validarEstudiante(email.text, pass.text)
-                              .then((value) {
-                            if (controle.listaEstudianteLogin!.isEmpty) {
-                              Get.snackbar('Usuario', 'Usuario no encontrado',
-                                  duration: const Duration(seconds: 2),
-                                  icon: const Icon(Icons.info),
-                                  shouldIconPulse: true,
-                                  backgroundColor: const Color(0xFFDEE2E6));
-                            } else {
-                              Get.toNamed("/home");
-                            }
-                          });
-                    // Get.toNamed("/home");
+                      // controle
+                      //         .validarEstudiante(email.text, pass.text)
+                      //         .then((value) {
+                      //       if (controle.listaEstudianteLogin!.isEmpty) {
+                      //         Get.snackbar('Usuario', 'Usuario no encontrado',
+                      //             duration: const Duration(seconds: 2),
+                      //             icon: const Icon(Icons.info),
+                      //             shouldIconPulse: true,
+                      //             backgroundColor: const Color(0xFFDEE2E6));
+                      //       } else {
+                      //         Get.toNamed("/home");
+                      //       }
+                      //     });
+                     Get.toNamed("/home");
                       //Navigator.push(context, MaterialPageRoute(builder: (context) => const Principal()));
                     },
                     // ignore: sort_child_properties_last

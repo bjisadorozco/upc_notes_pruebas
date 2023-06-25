@@ -137,7 +137,7 @@ class _RegistratePruebaState extends State<RegistratePrueba> {
                   children: [
                     SizedBox(
                       width: 300,
-                      child: TextFormField(
+                      child: Obx(() => TextFormField(
                         controller: passc,
                         obscureText: _showPassword.value,
                         decoration: InputDecoration(
@@ -162,6 +162,7 @@ class _RegistratePruebaState extends State<RegistratePrueba> {
                             ),
                           ),
                         ),
+                      ),
                       ),
                     ),
                   ]
@@ -192,6 +193,10 @@ class _RegistratePruebaState extends State<RegistratePrueba> {
                                   shouldIconPulse: true,
                                   backgroundColor: const Color(0xFFDEE2E6));
                         }
+                        usuario.text = "";
+                        email.text = "";
+                        pass.text = "";
+                        passc.text = "";
                     },
                     // ignore: sort_child_properties_last
                     child: const Text(

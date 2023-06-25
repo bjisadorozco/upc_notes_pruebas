@@ -5,6 +5,7 @@ import 'package:upc_notes/iu/pages/pruebaIniciarSesion.dart';
 import 'package:upc_notes/iu/pages/pruebaPrincipal.dart';
 import 'package:upc_notes/iu/pages/pruebaRegistrarApuntes.dart';
 import 'package:upc_notes/iu/pages/pruebaRegistrate.dart';
+import 'package:upc_notes/iu/pages/registrarProfesores.dart';
 
 class App extends StatelessWidget {
   const App({super.key});
@@ -22,7 +23,7 @@ class App extends StatelessWidget {
         "/register": (context) => const RegistratePrueba(),
         "/home": (context) => const Principal(),
         "/addApuntes": (context) => const RegistrarApuntes(),
-        "/addProfesores": (context) => const registrarProfesores(),
+        "/addProfesores": (context) => const RegistroDocentes(),
       },
     );
   }

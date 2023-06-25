@@ -4,8 +4,12 @@ import 'package:upc_notes/iu/pages/pruebaCalculoRapido.dart';
 import 'package:upc_notes/iu/pages/pruebaIniciarSesion.dart';
 import 'package:upc_notes/iu/pages/pruebaListaApuntes.dart';
 import 'package:upc_notes/iu/pages/pruebaListarAsignatura.dart';
+import 'package:upc_notes/iu/pages/pruebaPrincipal.dart';
+import 'package:upc_notes/iu/pages/registrarProfesores.dart';
 
 import 'PruebaListaProfesores.dart';
+import 'PruebaRegistrarProfesores.dart';
+import 'pruebaRegistrarAsignatura.dart';
 
 class MenuLateral extends StatelessWidget {
   const MenuLateral({super.key});
@@ -33,9 +37,9 @@ class MenuLateral extends StatelessWidget {
                   ),),
                   currentAccountPicture: 
                          CircleAvatar(
-                          //backgroundImage: AssetImage('assets/usuario.png'),
-                           backgroundImage: NetworkImage('https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcRmtMFSevZVhfvwhiimXwcKSAYU2YELXo_mrw&usqp=CAU',
-                             ),
+                          //backgroundImage: AssetImage('assets/discord.png'),
+                          backgroundImage: NetworkImage('https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcQ9mpGaPj4GHfJJJcUZYVgGl4OyVaz5mGBUNSg0hWskER0WlUt2e0dCF6VtQRZfXenIz2Q&usqp=CAU',
+                            ),
                             ),    
                   decoration: BoxDecoration(
                     color: Color(0xFFDEE2E6),
@@ -51,7 +55,12 @@ class MenuLateral extends StatelessWidget {
             ListTile(
                 leading: Icon(Icons.home),
                 title: Text("Inicio"),
-                onTap:() => null,
+                onTap:() => {
+                  Navigator.push(
+                    context,
+                    MaterialPageRoute(builder: (context) => const Principal()),
+                  ),
+                },
                 iconColor: Colors.black,
                 //tileColor: Colors.black,
             ),
@@ -68,7 +77,7 @@ class MenuLateral extends StatelessWidget {
                 onTap:() => {
                   Navigator.push(
                     context,
-                    MaterialPageRoute(builder: (context) => const ListarAsignaturas()),
+                    MaterialPageRoute(builder: (context) => const RegistrarAsignaturas()),
                   ),
                 },
                 iconColor: Colors.black,
@@ -80,7 +89,7 @@ class MenuLateral extends StatelessWidget {
                 onTap:() => {
                   Navigator.push(
                     context,
-                    MaterialPageRoute(builder: (context) => const ListProfesores()),
+                    MaterialPageRoute(builder: (context) => const RegistroDocentes()),
                   ),
                 },
                 iconColor: Colors.black,

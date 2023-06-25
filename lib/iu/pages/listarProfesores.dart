@@ -1,27 +1,26 @@
 import 'package:flutter/material.dart';
 import 'package:get/get.dart';
-import 'package:upc_notes/domain/controller/controllerAsignaturas.dart';
-import 'package:upc_notes/iu/pages/pruebaModificarAsignatura.dart';
-import 'package:upc_notes/iu/pages/pruebaRegistrarAsignatura.dart';
+import 'package:upc_notes/iu/pages/pruebaModificarProfesor.dart';
+import '../../domain/controller/controllerProfesores.dart';
 
-class ListaAsignaturas extends StatelessWidget {
-  const ListaAsignaturas(
+class ListaProfesoresD extends StatelessWidget {
+  const ListaProfesoresD(
       {super.key,
-      required this.nombre,
-      required this.profesor,
-      required this.salon,
-      required this.detalles});
-  final String nombre;
-  final String profesor;
-  final String salon;
-  final String detalles;
+      required this.docente,
+      required this.correo,
+      required this.telefono,
+      required this.direccion});
+  final String docente;
+  final String correo;
+  final String telefono;
+  final String direccion;
 
   @override
   Widget build(BuildContext context) {
     return Center(
       child: Card(
         child: Container(
-          height: 200,
+          height: 170,
           width: 167,
           color: const Color(0xFFDEE2E6),
           child: Center(
@@ -33,11 +32,10 @@ class ListaAsignaturas extends StatelessWidget {
                       padding: const EdgeInsets.all(8.0),
                       child: Center(
                         child: Row(
-                          //mainAxisAlignment: MainAxisAlignment.center,
                           children: <Widget>[
-                            Icon(Icons.import_contacts),
+                            Icon(Icons.person),
                             Text(
-                              nombre,
+                              docente,
                               style: TextStyle(
                                 fontWeight: FontWeight.bold,
                                 fontSize: 18,
@@ -48,15 +46,26 @@ class ListaAsignaturas extends StatelessWidget {
                         ),
                       ),
                     ),
+                    /*Row(
+                      children: <Widget>[
+                        Icon(Icons.email),
+                        Text(
+                          correo,
+                          style: TextStyle(
+                            fontWeight: FontWeight.bold,
+                            fontSize: 17,
+                          ),
+                        ),
+                      ],
+                    ),*/
                     Padding(
                       padding: const EdgeInsets.all(8.0),
                       child: Center(
                         child: Row(
-                          //mainAxisAlignment: MainAxisAlignment.center,
                           children: <Widget>[
-                            Icon(Icons.person_2_outlined),
+                            Icon(Icons.phone),
                             Text(
-                              profesor,
+                              telefono,
                               style: TextStyle(
                                 fontWeight: FontWeight.bold,
                                 fontSize: 17,
@@ -70,29 +79,10 @@ class ListaAsignaturas extends StatelessWidget {
                       padding: const EdgeInsets.all(8.0),
                       child: Center(
                         child: Row(
-                          //mainAxisAlignment: MainAxisAlignment.center,
                           children: <Widget>[
                             Icon(Icons.location_on),
                             Text(
-                              salon,
-                              style: TextStyle(
-                                fontWeight: FontWeight.bold,
-                                fontSize: 17,
-                              ),
-                            ),
-                          ],
-                        ),
-                      ),
-                    ),
-                    Padding(
-                      padding: const EdgeInsets.all(8.0),
-                      child: Center(
-                        child: Row(
-                          //mainAxisAlignment: MainAxisAlignment.center,
-                          children: <Widget>[
-                            Icon(Icons.subject),
-                            Text(
-                              detalles,
+                              direccion,
                               style: TextStyle(
                                 fontWeight: FontWeight.bold,
                                 fontSize: 17,

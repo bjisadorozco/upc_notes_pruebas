@@ -1,6 +1,6 @@
 class ApuntesEstudiante{
-  late String titulo;
-  late String descripcion;
+  final String titulo;
+  final String descripcion;
 
   ApuntesEstudiante(
     {required this.titulo,

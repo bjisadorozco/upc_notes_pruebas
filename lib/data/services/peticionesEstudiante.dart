@@ -25,12 +25,12 @@ class PeticionesEstudiante {
     return pasar.map<Mensajes>((json) => Mensajes.desdeJson(json)).toList();
   }
 
-  static Future<List<Estudiante>> validarEstudiante(String e, String p) async {
+  static Future<List<Estudiante>> validarEstudiante(String email, String pass) async {
     var url = Uri.parse(
         "https://p-movil.000webhostapp.com/UPC_NOTES/validarEstudiante.php");
-    print(e);
-    final response = await http.post(url, body: {'email': e, 'pass': p});
-  //print(response.body);
+    print(email);
+    final response = await http.post(url, body: {'email': email, 'pass': pass});
+  print(response.body);
     return compute(convertirAlista2, response.body);
   }
 

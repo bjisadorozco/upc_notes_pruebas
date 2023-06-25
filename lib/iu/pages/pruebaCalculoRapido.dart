@@ -10,6 +10,10 @@ class CalculoRapido extends StatefulWidget {
 class _CalculoRapidoState extends State<CalculoRapido> {
   @override
   Widget build(BuildContext context) {
+    TextEditingController nota1 = TextEditingController();
+    TextEditingController nota2 = TextEditingController();
+    TextEditingController nota3 = TextEditingController();
+    TextEditingController nota4 = TextEditingController();
     return Scaffold(
       backgroundColor: const Color(0xFF7FE1AD),
       appBar: AppBar(
@@ -34,7 +38,7 @@ class _CalculoRapidoState extends State<CalculoRapido> {
             Container(
                 margin: const EdgeInsets.symmetric(horizontal: 10.0),
                 width: double.infinity,
-                height: 300,
+                height: 320,
                 decoration: BoxDecoration(
                 color: const Color(0xFFDEE2E6),
                 borderRadius: BorderRadius.circular(10.0),
@@ -84,7 +88,7 @@ class _CalculoRapidoState extends State<CalculoRapido> {
                   Padding(
                     padding: const EdgeInsets.symmetric(horizontal: 8.0),
                     child: Row(
-                      children: const [
+                      children:[
                         Icon(
                           Icons.calendar_month,
                           color: Colors.black,
@@ -100,6 +104,7 @@ class _CalculoRapidoState extends State<CalculoRapido> {
                         SizedBox(
                           width: 40,
                           child: TextField(
+                            controller: nota1,
                             decoration: InputDecoration(
                               hintText: 'Nota',
                               border: InputBorder.none,
@@ -127,7 +132,7 @@ class _CalculoRapidoState extends State<CalculoRapido> {
                   Padding(
                     padding: const EdgeInsets.symmetric(horizontal: 8.0),
                     child: Row(
-                      children: const [
+                      children: [
                         Icon(
                           Icons.calendar_month,
                           color: Colors.black,
@@ -143,6 +148,7 @@ class _CalculoRapidoState extends State<CalculoRapido> {
                         SizedBox(
                           width: 40,
                           child: TextField(
+                            controller: nota2,
                             decoration: InputDecoration(
                               hintText: 'Nota',
                               border: InputBorder.none,
@@ -169,7 +175,7 @@ class _CalculoRapidoState extends State<CalculoRapido> {
                   Padding(
                     padding: const EdgeInsets.symmetric(horizontal: 8.0),
                     child: Row(
-                      children: const [
+                      children: [
                         Icon(
                           Icons.calendar_month,
                           color: Colors.black,
@@ -185,12 +191,12 @@ class _CalculoRapidoState extends State<CalculoRapido> {
                         SizedBox(
                           width: 40,
                           child: TextField(
+                            controller: nota3,
                             decoration: InputDecoration(
                               hintText: 'Nota',
                               border: InputBorder.none,
                             ),
-                            style: TextStyle(fontSize: 18),
-                          
+                            style: TextStyle(fontSize: 18),                         
                           ),
                         ),
                         SizedBox(width: 20),
@@ -216,22 +222,44 @@ class _CalculoRapidoState extends State<CalculoRapido> {
                       children: [
                         ElevatedButton(
                           onPressed: () {
+                            double objetivo = 4.0;
+                            double valorNota1 = double.parse(nota1.text) * 0.3; //3.5
+                            double valorNota2 = double.parse(nota2.text) * 0.3; //4.0
+                            double valorNota3 = objetivo * 0.4; //4.0
+                            double notaFinal = (valorNota1 - valorNota2); 
+                            print(notaFinal);  
+                            nota3.text = ((valorNota3 + notaFinal)/0.4).toStringAsFixed(2);
                           },
                           style: ElevatedButton.styleFrom(
                             backgroundColor: const Color(0xFF7FE1AD),
                             shape: RoundedRectangleBorder(
-                            borderRadius: BorderRadius.circular(20), 
-                            side: const BorderSide(
-                            color: Colors.black,
-                            width: 1.0,
-                            ), // ajusta el radio según sea necesario
+                              borderRadius: BorderRadius.circular(20),
+                              side: const BorderSide(
+                                color: Colors.black,
+                                width: 1.0,
+                              ),
                             ),
-                            ),
-                            child: const Text('Preguntar', style: TextStyle(
-                            color: Colors.black,
-                              fontSize: 18,
-                            ),),
                           ),
+                          child: const Text(
+                            'Preguntar',
+                            style: TextStyle(
+                              color: Colors.black,
+                              fontSize: 18,
+                            ),
+                          ),
+                        ),
+                        // const SizedBox(width: 95),
+                        // SizedBox(
+                        //   width: 40,
+                        //   child: TextField(
+                        //     controller: nota3,
+                        //     decoration: InputDecoration(
+                        //       hintText: 'Nota',
+                        //       border: InputBorder.none,
+                        //     ),
+                        //     style: TextStyle(fontSize: 18),
+                        //   ),
+                        // ),
                       ],
                     ),
                   )
@@ -242,7 +270,7 @@ class _CalculoRapidoState extends State<CalculoRapido> {
             Container(
             margin: const EdgeInsets.symmetric(horizontal: 10.0),
             width: double.infinity,
-            height: 200,
+            height: 220,
             decoration: BoxDecoration(
               color: const Color(0xFFDEE2E6),
               borderRadius: BorderRadius.circular(10.0),
@@ -308,7 +336,7 @@ class _CalculoRapidoState extends State<CalculoRapido> {
                 ),
                 SizedBox(
                   child: Row(
-                    children: const [
+                    children: [
                       SizedBox(width: 35),
                       Icon(
                         Icons.flag,
@@ -317,12 +345,12 @@ class _CalculoRapidoState extends State<CalculoRapido> {
                       ),
                       SizedBox(width: 5),
                       Text(
-                        "Nota",
-                        style: TextStyle(
-                        fontSize: 18,
-                        color: Colors.black,
+                          "4.0",
+                          style: TextStyle(
+                            fontSize: 18,
+                            color: Colors.black,
+                          ),
                         ),
-                      ),
                       SizedBox(width: 110),
                       Icon(
                         Icons.event_available,

@@ -3,95 +3,83 @@ import 'package:get/get.dart';
 import 'package:upc_notes/iu/pages/pruebaModificarProfesor.dart';
 import '../../domain/controller/controllerProfesores.dart';
 
-class ListProfesores extends StatefulWidget {
-  const ListProfesores({super.key});
+class ListaProfesores extends StatelessWidget {
+  const ListaProfesores({
+    super.key,
+    required this.docente,
+    required this.email,
+    required this.telefono,
+    //required this.direccion
+  });
+  final String docente;
+  final String email;
+  final String telefono;
+  //final String direccion;
 
-  @override
-  State<ListProfesores> createState() => _ListProfesoresState();
-}
-
-class _ListProfesoresState extends State<ListProfesores> {
-   ControlProfesores controlP = Get.find();
   @override
   Widget build(BuildContext context) {
-    //ControlProfesores controlP = Get.find();
-    //ControlUser controlu = Get.find();
-    return Scaffold(
-      backgroundColor: const Color(0xFF7FE1AD),
-      appBar: AppBar(
-        backgroundColor: const Color(0xFFDEE2E6),
-        iconTheme: const IconThemeData(
-          color: Colors.black,
-          size: 30.0,
-        ),
-        title: const Text(
-          "Profesores",
-          style: TextStyle(
-            color: Colors.black,
-            fontWeight: FontWeight.bold,
+    return Center(
+      child: Card(
+        child: Container(
+          height: 170,
+          width: 167,
+          color: const Color(0xFFDEE2E6),
+          child: Center(
+            child: Padding(
+                padding: const EdgeInsets.all(8.0),
+                child: Column(
+                  children: <Widget>[
+                    Center(
+                      child: Row(
+                        mainAxisAlignment: MainAxisAlignment.center,
+                        children: <Widget>[
+                          Icon(Icons.import_contacts),
+                          Text(
+                            docente,
+                            style: TextStyle(
+                              fontWeight: FontWeight.bold,
+                              fontSize: 18,
+                              color: Colors.black,
+                            ),
+                          ),
+                        ],
+                      ),
+                    ),
+                    Center(
+                      child: Row(
+                        mainAxisAlignment: MainAxisAlignment.center,
+                        children: <Widget>[
+                          Icon(Icons.email),
+                          Text(
+                            email,
+                            style: TextStyle(
+                              fontWeight: FontWeight.bold,
+                              fontSize: 17,
+                            ),
+                          ),
+                        ],
+                      ),
+                    ),
+                    Center(
+                      child: Row(
+                        mainAxisAlignment: MainAxisAlignment.center,
+                        children: <Widget>[
+                          Icon(Icons.phone),
+                          Text(
+                            telefono,
+                            style: TextStyle(
+                              fontWeight: FontWeight.bold,
+                              fontSize: 17,
+                            ),
+                          ),
+                        ],
+                      ),
+                    ),
+                  ],
+                )),
           ),
         ),
       ),
-      body: Obx(() => ListView.builder(
-        itemCount: controlP.listaProfesores!.length,
-        itemBuilder: (BuildContext context, int index) {
-          return ListTile(
-            onLongPress: (){
-                  String mensaje = "¿Estás seguro que deseas eliminar este Profesor?";
-                  Get.defaultDialog(
-                  title: "Eliminar profesor",
-                  middleText: mensaje,
-                  textCancel: "Cancelar",
-                  textConfirm: "Eliminar",
-                  confirmTextColor: Colors.black,
-                  buttonColor: const Color(0xFF7FE1AD),
-                  cancelTextColor: Colors.black,
-                  onCancel: () => {},
-                  onConfirm: () {
-                   String id =
-                        controlP.listaProfesores![index].idProfe.toString();
-                        controlP.delProfesor(int.parse(id)).then((value) => {
-                        Get.snackbar('Profesores',
-                        controlP.listaMensajes![0].mensaje,
-                        duration: const Duration(seconds: 3),
-                        icon: const Icon(Icons.info),
-                        shouldIconPulse: true,
-                        backgroundColor: const Color(0xFFDEE2E6))    
-                        }
-                        );
-                        controlP.getProfesoresGral();
-                        Get.back();
-                    },
-                );
-              },
-               onTap: (){
-                  Get.to(() => ModificarProfesor(
-                          //idProfe: controlP.listaProfesores![index].idProfe,
-                          docente: controlP.listaProfesores![index].docente,
-                          email: controlP.listaProfesores![index].email,
-                          telefono: controlP.listaProfesores![index].telefono,
-                          direccion: controlP.listaProfesores![index].direccion,
-                          ));
-                },
-            title: Text(
-                controlP.listaProfesores![index].docente),
-            subtitle: Text(controlP.listaProfesores![index].email),
-          );
-        },
-      ),
-      ),
-      floatingActionButton: FloatingActionButton(
-        onPressed: () {
-          Get.toNamed("/addProfesores");
-        //   Navigator.push(
-        //   context,
-        //   MaterialPageRoute(builder: (context) => registrarProfesores()),
-        // );
-        },
-        child: const Icon(Icons.add),
-        backgroundColor: Colors.black,
-      ),
-      
     );
   }
 }

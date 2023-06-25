@@ -1,37 +1,40 @@
 import 'package:flutter/material.dart';
 import 'package:get/get.dart';
-import 'package:upc_notes/domain/models/asignaturas.dart';
-import 'package:upc_notes/iu/pages/pruebaListarAsignatura.dart';
-import '../../domain/controller/controllerAsignaturas.dart';
+import 'package:upc_notes/domain/models/profesores.dart';
+import 'package:upc_notes/iu/pages/PruebaListaProfesores.dart';
 
-class RegistrarAsignaturas extends StatefulWidget {
-  const RegistrarAsignaturas({super.key});
+import '../../domain/controller/controllerProfesores.dart';
+import 'listarProfesores.dart';
+
+class RegistroDocentes extends StatefulWidget {
+  const RegistroDocentes({super.key});
 
   @override
-  State<RegistrarAsignaturas> createState() => _RegistrarAsignaturasState();
+  State<RegistroDocentes> createState() => _RegistroDocentesState();
 }
 
-class _RegistrarAsignaturasState extends State<RegistrarAsignaturas> {
-  ControlAsignatura controlA = Get.find();
-  TextEditingController nombre = TextEditingController();
-  TextEditingController profesor = TextEditingController();
-  TextEditingController salon = TextEditingController();
-  TextEditingController detalles = TextEditingController();
+class _RegistroDocentesState extends State<RegistroDocentes> {
+  @override
+  ControlProfesores controlD = Get.find();
+  TextEditingController docente = TextEditingController();
+  TextEditingController email = TextEditingController();
+  TextEditingController telefono = TextEditingController();
+  TextEditingController direccion = TextEditingController();
 
-  Widget _buildAsignaturaList() {
+  Widget _buildProfesoresList() {
     return FutureBuilder(
-        future: controlA.getAsignaturaGral(),
+        future: controlD.getProfesoresGral(),
         builder: (context, snapshot) {
           return Obx(() => GridView.builder(
-              itemCount: controlA.listarAsignaturas!.length,
+              itemCount: controlD.listaProfesores!.length,
               gridDelegate: SliverGridDelegateWithFixedCrossAxisCount(
                 crossAxisCount: 2,
               ),
               itemBuilder: (context, index) {
-                Asignatura asignatura = controlA.listarAsignaturas![index];
+                Profesores profesor = controlD.listaProfesores![index];
                 return GestureDetector(
                     onTap: () {
-                      editarAsignatura(asignatura);
+                      editarProfesor(profesor);
                       showModalBottomSheet(
                           context: context,
                           builder: (BuildContext bc) {
@@ -46,7 +49,7 @@ class _RegistrarAsignaturasState extends State<RegistrarAsignaturas> {
                                         children: const [
                                           SizedBox(width: 8.0),
                                           Text(
-                                            "Datos básicos",
+                                            "Datos del profesor",
                                             style: TextStyle(
                                               fontSize: 20,
                                             ),
@@ -63,17 +66,16 @@ class _RegistrarAsignaturasState extends State<RegistrarAsignaturas> {
                                       child: Row(
                                         children: [
                                           Icon(
-                                            Icons.import_contacts,
+                                            Icons.person_2_outlined,
                                             color: Colors.black,
                                           ),
                                           SizedBox(width: 12.0),
                                           SizedBox(
                                             width: 280,
                                             child: TextField(
-                                              controller: nombre,
+                                              controller: docente,
                                               decoration: InputDecoration(
-                                                hintText:
-                                                    'Nombre de la asignatura',
+                                                hintText: 'Nombre del profesor',
                                                 border: InputBorder.none,
                                               ),
                                               style: TextStyle(fontSize: 18),
@@ -95,16 +97,47 @@ class _RegistrarAsignaturasState extends State<RegistrarAsignaturas> {
                                       child: Row(
                                         children: [
                                           Icon(
-                                            Icons.person_2_outlined,
+                                            Icons.email,
                                             color: Colors.black,
                                           ),
                                           SizedBox(width: 12.0),
                                           SizedBox(
                                             width: 280,
                                             child: TextField(
-                                              controller: profesor,
+                                              controller: email,
                                               decoration: InputDecoration(
-                                                hintText: 'Nombre del profesor',
+                                                hintText: 'Correo Electronico',
+                                                border: InputBorder.none,
+                                              ),
+                                              style: TextStyle(fontSize: 18),
+                                            ),
+                                          ),
+                                          SizedBox(width: 20),
+                                        ],
+                                      ),
+                                    ),
+                                    //const SizedBox(height: 10),
+                                    const Divider(
+                                      color: Colors.black,
+                                      thickness: 1.0,
+                                      height: 1.0,
+                                    ),
+                                    Padding(
+                                      padding: const EdgeInsets.symmetric(
+                                          horizontal: 8.0),
+                                      child: Row(
+                                        children: [
+                                          Icon(
+                                            Icons.phone,
+                                            color: Colors.black,
+                                          ),
+                                          SizedBox(width: 12.0),
+                                          SizedBox(
+                                            width: 280,
+                                            child: TextField(
+                                              controller: telefono,
+                                              decoration: InputDecoration(
+                                                hintText: 'Telefono',
                                                 border: InputBorder.none,
                                               ),
                                               style: TextStyle(fontSize: 18),
@@ -133,40 +166,9 @@ class _RegistrarAsignaturasState extends State<RegistrarAsignaturas> {
                                           SizedBox(
                                             width: 280,
                                             child: TextField(
-                                              controller: salon,
+                                              controller: direccion,
                                               decoration: InputDecoration(
-                                                hintText: 'Salon de clases',
-                                                border: InputBorder.none,
-                                              ),
-                                              style: TextStyle(fontSize: 18),
-                                            ),
-                                          ),
-                                          SizedBox(width: 20),
-                                        ],
-                                      ),
-                                    ),
-                                    //const SizedBox(height: 10),
-                                    const Divider(
-                                      color: Colors.black,
-                                      thickness: 1.0,
-                                      height: 1.0,
-                                    ),
-                                    Padding(
-                                      padding: const EdgeInsets.symmetric(
-                                          horizontal: 8.0),
-                                      child: Row(
-                                        children: [
-                                          Icon(
-                                            Icons.subject,
-                                            color: Colors.black,
-                                          ),
-                                          SizedBox(width: 12.0),
-                                          SizedBox(
-                                            width: 280,
-                                            child: TextField(
-                                              controller: detalles,
-                                              decoration: InputDecoration(
-                                                hintText: 'Detalles',
+                                                hintText: 'Direccion',
                                                 border: InputBorder.none,
                                               ),
                                               style: TextStyle(fontSize: 18),
@@ -223,16 +225,16 @@ class _RegistrarAsignaturasState extends State<RegistrarAsignaturas> {
                                                       horizontal: 5),
                                               child: ElevatedButton(
                                                 onPressed: () {
-                                                  controlA
-                                                      .modAsignatura(
-                                                          nombre.text,
-                                                          profesor.text,
-                                                          salon.text,
-                                                          detalles.text)
+                                                  controlD
+                                                      .modProfesor(
+                                                          docente.text,
+                                                          email.text,
+                                                          telefono.text,
+                                                          direccion.text)
                                                       .then((value) => {
                                                             Get.snackbar(
-                                                                'Asignatura',
-                                                                controlA
+                                                                'Profesor',
+                                                                controlD
                                                                     .listaMensajes![
                                                                         0]
                                                                     .mensaje,
@@ -251,12 +253,12 @@ class _RegistrarAsignaturasState extends State<RegistrarAsignaturas> {
                                                                         255,
                                                                         255,
                                                                         255)),
-                                                            // nombre.text = "",
-                                                            // profesor.text = "",
-                                                            // salon.text = "",
-                                                            // detalles.text = "",
+                                                            // docente.text = "",
+                                                            // email.text = "",
+                                                            // telefono.text = "",
+                                                            // direccion.text = "",
                                                           });
-                                                  controlA.getAsignaturaGral();
+                                                  controlD.getProfesoresGral();
                                                   setState(() {
                                                     Navigator.pop(context);
                                                   });
@@ -291,9 +293,9 @@ class _RegistrarAsignaturasState extends State<RegistrarAsignaturas> {
                     },
                     onLongPress: () {
                       String mensaje =
-                          "¿Estás seguro que deseas eliminar esta Asignatura?";
+                          "¿Estás seguro que deseas eliminar este Profesor?";
                       Get.defaultDialog(
-                        title: "Eliminar Asignatura",
+                        title: "Eliminar Profesor",
                         middleText: mensaje,
                         textCancel: "Cancelar",
                         textConfirm: "Eliminar",
@@ -302,30 +304,30 @@ class _RegistrarAsignaturasState extends State<RegistrarAsignaturas> {
                         cancelTextColor: Colors.black,
                         onCancel: () => {Get.back()},
                         onConfirm: () {
-                          String id = controlA.listarAsignaturas![index].nombre;
-                          controlA
-                              .delAsignatura(asignatura.nombre)
+                          String id = controlD.listaProfesores![index].docente;
+                          controlD
+                              .delProfesor(profesor.docente)
                               .then((value) => {
-                                    Get.snackbar('Asignatura',
-                                        controlA.listaMensajes![0].mensaje,
+                                    Get.snackbar('Profesor',
+                                        controlD.listaMensajes![0].mensaje,
                                         duration: const Duration(seconds: 3),
                                         icon: const Icon(Icons.info),
                                         shouldIconPulse: true,
                                         backgroundColor:
-                                            const Color(0xFFDEE2E6))
+                                            Color.fromARGB(255, 255, 255, 255))
                                   });
-                          controlA.getAsignaturaGral();
+                          controlD.getProfesoresGral();
                           Get.back();
                         },
                       );
                     },
                     child: Stack(
                       children: [
-                        ListaAsignaturas(
-                          nombre: asignatura.nombre,
-                          profesor: asignatura.profesor,
-                          salon: asignatura.salon,
-                          detalles: asignatura.detalles,
+                        ListaProfesoresD(
+                          docente: profesor.docente,
+                          correo: profesor.email,
+                          telefono: profesor.telefono,
+                          direccion: profesor.direccion,
                         )
                       ],
                     ));
@@ -333,12 +335,12 @@ class _RegistrarAsignaturasState extends State<RegistrarAsignaturas> {
         });
   }
 
-  void editarAsignatura(Asignatura asignatura) {
+  void editarProfesor(Profesores profesor) {
     setState(() {
-      nombre.text = asignatura.nombre;
-      profesor.text = asignatura.profesor;
-      salon.text = asignatura.salon;
-      detalles.text = asignatura.detalles;
+      docente.text = profesor.docente;
+      email.text = profesor.email;
+      telefono.text = profesor.telefono;
+      direccion.text = profesor.direccion;
     });
   }
 
@@ -353,7 +355,7 @@ class _RegistrarAsignaturasState extends State<RegistrarAsignaturas> {
             size: 30.0,
           ),
           title: const Text(
-            "Asignaturas",
+            "Profesores",
             style: TextStyle(
               color: Colors.black,
               fontWeight: FontWeight.bold,
@@ -363,11 +365,11 @@ class _RegistrarAsignaturasState extends State<RegistrarAsignaturas> {
         floatingActionButton: FloatingActionButton(
           onPressed: () {
             setState(() {
-              nombre.clear();
-              profesor.clear();
-              salon.clear();
-              detalles.clear();
-              RegistrarAsignatura(context);
+              docente.clear();
+              email.clear();
+              telefono.clear();
+              direccion.clear();
+              RegistroDocentes(context);
             });
           },
           child: const Icon(Icons.add),
@@ -375,10 +377,10 @@ class _RegistrarAsignaturasState extends State<RegistrarAsignaturas> {
         ),
         body: Container(
             //margin: const EdgeInsets.symmetric(horizontal: 5),
-            child: _buildAsignaturaList()));
+            child: _buildProfesoresList()));
   }
 
-  void RegistrarAsignatura(context) {
+  void RegistroDocentes(context) {
     showModalBottomSheet(
         context: context,
         builder: (BuildContext bc) {
@@ -392,7 +394,7 @@ class _RegistrarAsignaturasState extends State<RegistrarAsignaturas> {
                   children: const [
                     SizedBox(width: 8.0),
                     Text(
-                      "Datos básicos",
+                      "Datos del Profesor",
                       style: TextStyle(
                         fontSize: 20,
                       ),
@@ -408,16 +410,16 @@ class _RegistrarAsignaturasState extends State<RegistrarAsignaturas> {
                 child: Row(
                   children: [
                     Icon(
-                      Icons.import_contacts,
-                      color: Colors.black,
+                      Icons.person_2_outlined,
+                      color: Color.fromARGB(255, 8, 7, 7),
                     ),
                     SizedBox(width: 12.0),
                     SizedBox(
                       width: 280,
                       child: TextField(
-                        controller: nombre,
+                        controller: docente,
                         decoration: InputDecoration(
-                          hintText: 'Nombre de la asignatura',
+                          hintText: 'Nombre del profesor',
                           border: InputBorder.none,
                         ),
                         style: TextStyle(fontSize: 18),
@@ -438,16 +440,46 @@ class _RegistrarAsignaturasState extends State<RegistrarAsignaturas> {
                 child: Row(
                   children: [
                     Icon(
-                      Icons.person_2_outlined,
+                      Icons.email,
                       color: Colors.black,
                     ),
                     SizedBox(width: 12.0),
                     SizedBox(
                       width: 280,
                       child: TextField(
-                        controller: profesor,
+                        controller: email,
                         decoration: InputDecoration(
-                          hintText: 'Nombre del profesor',
+                          hintText: 'Correo',
+                          border: InputBorder.none,
+                        ),
+                        style: TextStyle(fontSize: 18),
+                      ),
+                    ),
+                    SizedBox(width: 20),
+                  ],
+                ),
+              ),
+              //const SizedBox(height: 10),
+              const Divider(
+                color: Colors.black,
+                thickness: 1.0,
+                height: 1.0,
+              ),
+              Padding(
+                padding: const EdgeInsets.symmetric(horizontal: 8.0),
+                child: Row(
+                  children: [
+                    Icon(
+                      Icons.phone,
+                      color: Colors.black,
+                    ),
+                    SizedBox(width: 12.0),
+                    SizedBox(
+                      width: 280,
+                      child: TextField(
+                        controller: telefono,
+                        decoration: InputDecoration(
+                          hintText: 'Telefono',
                           border: InputBorder.none,
                         ),
                         style: TextStyle(fontSize: 18),
@@ -475,39 +507,9 @@ class _RegistrarAsignaturasState extends State<RegistrarAsignaturas> {
                     SizedBox(
                       width: 280,
                       child: TextField(
-                        controller: salon,
+                        controller: direccion,
                         decoration: InputDecoration(
-                          hintText: 'Salon de clases',
-                          border: InputBorder.none,
-                        ),
-                        style: TextStyle(fontSize: 18),
-                      ),
-                    ),
-                    SizedBox(width: 20),
-                  ],
-                ),
-              ),
-              //const SizedBox(height: 10),
-              const Divider(
-                color: Colors.black,
-                thickness: 1.0,
-                height: 1.0,
-              ),
-              Padding(
-                padding: const EdgeInsets.symmetric(horizontal: 8.0),
-                child: Row(
-                  children: [
-                    Icon(
-                      Icons.subject,
-                      color: Colors.black,
-                    ),
-                    SizedBox(width: 12.0),
-                    SizedBox(
-                      width: 280,
-                      child: TextField(
-                        controller: detalles,
-                        decoration: InputDecoration(
-                          hintText: 'Detalles',
+                          hintText: 'Direccion',
                           border: InputBorder.none,
                         ),
                         style: TextStyle(fontSize: 18),
@@ -557,10 +559,10 @@ class _RegistrarAsignaturasState extends State<RegistrarAsignaturas> {
                     padding: const EdgeInsets.symmetric(horizontal: 5),
                     child: ElevatedButton(
                       onPressed: () {
-                        if (nombre.text.isEmpty ||
-                            profesor.text.isEmpty ||
-                            salon.text.isEmpty ||
-                            detalles.text.isEmpty) {
+                        if (docente.text.isEmpty ||
+                            email.text.isEmpty ||
+                            telefono.text.isEmpty ||
+                            direccion.text.isEmpty) {
                           String mensaje = "Por favor ingrese todos los datos";
                           Get.defaultDialog(
                             title: "Campos Incompletos",
@@ -575,27 +577,27 @@ class _RegistrarAsignaturasState extends State<RegistrarAsignaturas> {
                               Get.back();
                             },
                           );
-                        } else if (nombre.text.isNotEmpty ||
-                            profesor.text.isNotEmpty ||
-                            salon.text.isNotEmpty ||
-                            detalles.text.isNotEmpty) {
-                          controlA
-                              .crearAsignatura(nombre.text, profesor.text,
-                                  salon.text, detalles.text)
+                        } else if (docente.text.isNotEmpty ||
+                            email.text.isNotEmpty ||
+                            telefono.text.isNotEmpty ||
+                            direccion.text.isNotEmpty) {
+                          controlD
+                              .crearProfesor(docente.text, email.text,
+                                  telefono.text, direccion.text)
                               .then((value) => {
-                                    Get.snackbar('Asignatura',
-                                        controlA.listaMensajes![0].mensaje,
+                                    Get.snackbar('Profesor',
+                                        controlD.listaMensajes![0].mensaje,
                                         duration: const Duration(seconds: 2),
                                         icon: const Icon(Icons.info),
                                         shouldIconPulse: true,
                                         backgroundColor:
-                                            const Color(0xFFDEE2E6)),
-                                    nombre.text = "",
-                                    profesor.text = "",
-                                    salon.text = "",
-                                    detalles.text = "",
+                                            Color.fromARGB(255, 255, 255, 255)),
+                                    docente.text = "",
+                                    email.text = "",
+                                    telefono.text = "",
+                                    direccion.text = "",
                                   });
-                          controlA.getAsignaturaGral();
+                          controlD.getProfesoresGral();
                           setState(() {
                             Navigator.pop(context);
                           });

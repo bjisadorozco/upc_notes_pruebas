@@ -11,10 +11,15 @@ class ControlEstudiante extends GetxController {
     _listarMensajes.value = await PeticionesEstudiante.registrarEstudiante(usuario, e, p);
   }
 
-  Future<void> validarEstudiante(String e, String p) async {
-    print(e);
-    _listarEstudiante.value = await PeticionesEstudiante.validarEstudiante(e, p);
-  }
+  Future<void> validarEstudiante(String m, String p) async {
+    print(m);
+    _listarEstudiante.value = await PeticionesEstudiante.validarEstudiante(m, p);
+    // try{
+    //   // _listarEstudiante.value = await PeticionesEstudiante.validarEstudiante(e, p);
+    // }catch(e){
+    //   _listarEstudiante.value = await PeticionesEstudiante.validarEstudiante(m, p);
+    // }
+    }
 
   List<Mensajes>? get listaMensajes => _listarMensajes.value;
   List<Estudiante>? get listaEstudianteLogin => _listarEstudiante.value;

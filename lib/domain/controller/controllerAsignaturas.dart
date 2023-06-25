@@ -15,11 +15,11 @@ class ControlAsignatura extends GetxController {
     _listarMensajes.value = await PeticionesAsignaturas.registrarAsignaturas(nombre, profesor, salon, detalles);
   }
 
-  Future<void> delProfesor(String nombre) async {
+  Future<void> delAsignatura(String nombre) async {
     _listarMensajes.value = await PeticionesAsignaturas.eliminarAsignatura(nombre);
     await getAsignaturaGral();
   }
-  Future<void> modProfesor(String nombre, String profesor, String salon, String detalles) async {
+  Future<void> modAsignatura(String nombre, String profesor, String salon, String detalles) async {
     _listarMensajes.value = await PeticionesAsignaturas.modificarAsignatura(nombre, profesor, salon, detalles);
     await getAsignaturaGral();
   }
@@ -28,5 +28,5 @@ class ControlAsignatura extends GetxController {
   }
 
   List<Mensajes>? get listaMensajes => _listarMensajes.value;
-  List<Asignatura>? get ListarAsignaturas => _listaAsignaturas.value;
+  List<Asignatura>? get listarAsignaturas => _listaAsignaturas.value;
 }

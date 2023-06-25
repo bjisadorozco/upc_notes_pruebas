@@ -146,7 +146,7 @@ class _ModificarApunteState extends State<ModificarApuntes> {
                                           icon: const Icon(Icons.info),
                                           shouldIconPulse: true,
                                           backgroundColor:
-                                              const Color(0xFFDEE2E6)),
+                                              Color.fromARGB(255, 255, 255, 255)),
                                       titulo.text = "",
                                       descripcion.text = "",
                                       controla.getApuntesGral(),

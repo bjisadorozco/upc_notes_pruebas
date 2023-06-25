@@ -2,8 +2,8 @@ import 'package:get/get.dart';
 import '../../data/services/peticionesApuntes.dart';
 import '../models/apuntes.dart';
 import '../models/utiles.dart';
-
 class ControlApuntes extends GetxController {
+
   final Rxn<List<Mensajes>> _listarMensajes = Rxn<List<Mensajes>>([]);
   final Rxn<List<ApuntesEstudiante>> _listarApuntes = Rxn<List<ApuntesEstudiante>>([]);
 

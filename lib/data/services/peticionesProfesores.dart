@@ -19,12 +19,12 @@ class PeticionesProfesores {
   }
   
   static Future<List<Mensajes>> eliminarProfesor(
-      int idProfe) async {
+      String docente) async {
     var url = Uri.parse(
         "https://p-movil.000webhostapp.com/UPC_NOTES/eliminarProfesor.php");
 
     final response = await http
-        .post(url, body: {'idProfe': idProfe});
+        .post(url, body: {'docente': docente});
 
     print(response.statusCode);
     //print(response.body);
@@ -38,7 +38,7 @@ class PeticionesProfesores {
     final response = await http.get(url);
 
     print(response.statusCode);
-    //print(response.body);
+    print(response.body);
     return compute(convertirAlista2, response.body);
   }
 

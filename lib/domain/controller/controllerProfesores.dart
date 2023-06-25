@@ -10,8 +10,8 @@ class ControlProfesores extends GetxController {
   ControlProfesores(){
     _listarProfesores.value = [];
   }
-  Future<void> delProfesor(int id) async {
-    _listarMensajes.value = await PeticionesProfesores.eliminarProfesor(id);
+  Future<void> delProfesor(String docente) async {
+    _listarMensajes.value = await PeticionesProfesores.eliminarProfesor(docente);
     await getProfesoresGral();
   }
   Future<void> modProfesor(String docente, String email, String telefono, String direccion) async {
@@ -20,6 +20,7 @@ class ControlProfesores extends GetxController {
   }
   Future<void> getProfesoresGral() async {
     _listarProfesores.value = await PeticionesProfesores.getListProfesores();
+    print(_listarProfesores.value);
   }
 
   Future<void> crearProfesor(String docente, String email, String telefono, String direccion) async {

@@ -6,12 +6,12 @@ import 'package:http/http.dart' as http;
 
 class PeticionesAsignaturas {
   static Future<List<Mensajes>> modificarAsignatura(
-      String nombre, String profesor, String salon, String detalle) async {
+      String nombre, String profesor, String salon, String detalles) async {
     var url = Uri.parse(
         "https://p-movil.000webhostapp.com/UPC_NOTES/modificarAsignatura.php");
 
     final response = await http
-        .post(url, body: {'nombre': nombre, 'profesor': profesor, 'salon': salon, 'detalle': detalle});
+        .post(url, body: {'nombre': nombre, 'profesor': profesor, 'salon': salon, 'detalles': detalles});
 
     print(response.statusCode);
     //print(response.body);
